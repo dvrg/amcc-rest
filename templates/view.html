@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<table class="table-striped">
+  <thead>
+  <tr>
+    <td>Pesawat</td>
+    <td>Kode</td>
+    <td>Tujuan</td>
+    <td>Jam</td>
+    <td>Gate</td>
+    <td>Status</td>
+  </tr>
+</thead>
+<tbody>
+    {% for data in datas %}
+  <tr>
+    <td>{{ data.kode }}</td>
+    <td>{{ data.pesawat }}</td>
+    <td>{{ data.tujuan }}</td>
+    <td>{{ data.jam }}</td>
+    <td>{{ data.gate }}</td>
+    <td>{{ data.status }}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}
