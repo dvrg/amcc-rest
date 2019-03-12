@@ -60,7 +60,7 @@ def lihat():
     datas = Pesawat.query.all()
     return render_template('view.html', datas=datas)
 
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+@app.route('/api/v1.0/pesawat', methods=['GET'])
 def get_tasks():
     datas = Pesawat.query.all()
     result = []
@@ -79,3 +79,6 @@ def get_tasks():
     response = jsonify(result)
     response.status_code = 200
     return response
+
+if __name__ == "__main__":
+    app.run()
