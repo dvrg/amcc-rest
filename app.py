@@ -2,31 +2,40 @@ import os
 from flask import Flask, render_template, redirect, flash, url_for, jsonify, make_response
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, DateTimeField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, ValidationError, Length
 from wtforms.fields.html5 import DateField
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
 from flask_migrate import Migrate
-from flask_bootstrap import Bootstrap
 from datetime import datetime
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-Bootstrap(app)
 
 #config
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Halaman tidak ditemukan!'}), 404)
+
 class FormData(FlaskForm):
-    kode = StringField(u'Kode Penerbangan', validators=[DataRequired()])
-    pesawat = StringField(u'Nama Maskapai', validators=[DataRequired()])
-    tujuan = StringField(u'Tujuan', validators=[DataRequired()])
-    #jam = DateField(u'Jam Berangkat')
-    gate = StringField(u'Gate', validators=[DataRequired()])
+    kode = StringField(u'Kode Penerbangan', validators=[DataRequired(), Length(min=5, max=5)])
+    pesawat = SelectField(u'Nama Maskapai', choices=[('nam air', 'nam air'), ('lion air', 'lion air'), ('sriwijaya air', 'sriwijaya air'), ('batik air', 'batik air'), ('garuda indonesia', 'garuda indonesia')])
+    tujuan = StringField(u'Tujuan', validators=[DataRequired(), Length(min=7, max=7)])
+    jam = DateField(u'Jam Berangkat')
+    gate = SelectField(u'Gate', choices=[('01','01'), ('02','02'), ('03','03'), ('04','04')])
     status = SelectField(u'Status', choices=[('check in', 'check in'), ('to waiting room', 'to waiting room'), ('landing', 'landing'), ('take off', 'take off')])
     submit = SubmitField(u'Simpan')
+
+    def validate_kode(self, kode):
+        kode = Pesawat.query.filter_by(kode=kode.data).first()
+        if kode is not None:
+            raise ValidationError('kode sudah ada, gunakan kode lain!')
 
 class Pesawat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,9 +49,10 @@ class Pesawat(db.Model):
     def __repr__(self):
         return '<Kode %r>' % self.kode
 
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
+    @validates('kode', 'pesawat', 'tujuan', 'status')
+    def convert_upper(self, key, value):
+        return value.upper()
+
 
 @app.route('/tambah-data', methods=['GET', 'POST'])
 def tambah():
@@ -53,19 +63,19 @@ def tambah():
         db.session.commit()
         flash('Data Tersimpan!')
         return redirect(url_for('lihat'))
-    return render_template('add.html', form=form)
+    return render_template('admin/add_data.html', form=form)
 
 @app.route('/')
 def lihat():
-    datas = Pesawat.query.all()
-    return render_template('view.html', datas=datas)
+    data = Pesawat.query.all()
+    return render_template('admin/view_data.html', data=data)
 
-@app.route('/api/v1.0/pesawat', methods=['GET'])
-def get_tasks():
-    datas = Pesawat.query.all()
+@app.route('/api/pesawat', methods=['GET'])
+def get_data():
+    data = Pesawat.query.all()
     result = []
 
-    for data in datas:
+    for data in data:
         obj = {
             'id': data.id,
             'kode': data.kode,
@@ -81,5 +91,4 @@ def get_tasks():
     return response
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
