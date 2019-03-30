@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, flash, url_for, jsonify, make_response
+from flask import Flask, render_template, redirect, flash, url_for, jsonify, make_response, abort
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, DateTimeField
 from wtforms.validators import DataRequired, ValidationError, Length
@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error': 'Halaman tidak ditemukan!'}), 404)
+    return make_response(jsonify({'error': 'Tidak Ada Data!'}), 404)
 
 class FormData(FlaskForm):
     kode = StringField(u'Kode Penerbangan', validators=[DataRequired(), Length(min=5, max=5)])
@@ -53,6 +53,18 @@ class Pesawat(db.Model):
     def convert_upper(self, key, value):
         return value.upper()
 
+    def to_json(self):
+        obj = {
+            'id': self.id,
+            'kode': self.kode,
+            'pesawat': self.pesawat,
+            'tujuan': self.tujuan,
+            'jam': self.jam,
+            'gate': self.gate,
+            'status': self.status
+        }
+        return obj
+
 
 @app.route('/tambah-data', methods=['GET', 'POST'])
 def tambah():
@@ -70,25 +82,15 @@ def lihat():
     data = Pesawat.query.all()
     return render_template('admin/view_data.html', data=data)
 
-@app.route('/api/pesawat', methods=['GET'])
+@app.route('/api/pesawat/', methods=['GET'])
 def get_data():
     data = Pesawat.query.all()
-    result = []
+    return jsonify({ 'data': [data.to_json() for data in data] })
 
-    for data in data:
-        obj = {
-            'id': data.id,
-            'kode': data.kode,
-            'pesawat': data.pesawat,
-            'tujuan': data.tujuan,
-            'jam': data.jam,
-            'gate': data.gate,
-            'status': data.status
-        }
-        result.append(obj)
-    response = jsonify(result)
-    response.status_code = 200
-    return response
+@app.route('/api/pesawat/<int:id>', methods=['GET'])
+def get(id):
+    data = Pesawat.query.get_or_404(id)
+    return jsonify(data.to_json())
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0')
