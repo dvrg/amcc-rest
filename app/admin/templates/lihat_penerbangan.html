@@ -1,6 +1,6 @@
-{% extends 'admin/base.html' %}
+{% extends 'base_admin.html' %}
 
-{% block title %}Tampil Data Pesawat{% endblock %}
+{% block title %}Tampil Data Penerbangan{% endblock %}
 
 {% block content %}
 {% for message in get_flashed_messages() %}
@@ -9,12 +9,15 @@
         <span aria-hidden="true">×</span>
     </button>
     <strong>{{ message }}</strong>
-</div>            
+</div>
 {% endfor %}
-<div class="col-md-12 col-sm-12">
+<div class="card">
     <div class="card-header d-flex justify-content-between">
-        <div><i class="fas fa-table"></i> Data Pesawat</div>
-        <div><a href="{{ url_for('tambah') }}" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i> Tambah Data</a></div>
+        <div><i class="fas fa-table"></i> Data Penerbangan</div>
+        <div><a href="{{ url_for('admin.tambah_penerbangan') }}" class="btn btn-primary btn-sm"><i
+                    class="fas fa-plus-circle"></i>
+                Tambah
+                Data</a></div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -27,7 +30,7 @@
                         <th>Gate</th>
                         <th>Keberangkatan</th>
                         <th>Status</th>
-                        
+
                     </tr>
                 </thead>
                 <tfoot>
@@ -38,17 +41,17 @@
                         <th>Gate</th>
                         <th>Keberangkatan</th>
                         <th>Status</th>
-                        
+
                     </tr>
                 </tfoot>
                 <tbody>
                     {% for data in data %}
                     <tr>
                         <td>{{ data.kode | upper }}</td>
-                        <td>{{ data.pesawat | upper }}</td>
+                        <td>{{ data.maskapai | upper }}</td>
                         <td>{{ data.tujuan | upper }}</td>
                         <td>{{ data.gate }}</td>
-                        <td>{{ data.jam.strftime('%a, %d-%B-%Y %X') }}</td>
+                        <td>{{ data.jam }}</td>
                         <td>{{ data.status | upper }}</td>
                     </tr>
                     {% endfor %}
@@ -56,6 +59,6 @@
             </table>
         </div>
     </div>
-    </div>
+</div>
 </div>
 {% endblock %}

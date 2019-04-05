@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% block head %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Simple API for consuming to AMCC Desktop Programming">
+  <meta name="keyword" content="AMCC REST API">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block title %} {% endblock %} | AMCC AMIKOM</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sb-admin.min.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+
+  {% endblock %}
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      {% include 'include/_flash.html' %}
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</body>
+
+</html>

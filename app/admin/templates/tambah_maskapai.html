@@ -1,0 +1,32 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}Tambah Data Maskapai{% endblock %}
+
+{% block content %}
+<div class="card card-register">
+    <div class="card-header"><i class="fas fa-plus-circle"></i> Tambah Data Maskapai</div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="col-12 mb-3">
+                    {{ form.maskapai.label() }} {{ name }}
+                    {{ form.maskapai(class='form-control') }}
+                    {% if form.maskapai.errors %}
+                    <small class="form-text text-danger">
+                        {% for error in form.maskapai.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </small>
+                    {% endif%}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

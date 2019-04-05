@@ -1,0 +1,85 @@
+{% extends 'base_auth.html' %}
+{% block title %}Mendaftar sebagai user.{% endblock %}
+{% block content %}
+<div class="card-header">Register an Account</div>
+<div class="card-body">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        {{ form.name(class="form-control", autofocus=autofocus) }}
+                        {{ form.name.label }}
+                        {% if form.name.errors %}
+                        <small class="form-text text-danger">
+                            {% for error in form.name.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                        {% endif%}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        {{ form.username(class="form-control", autofocus=autofocus) }}
+                        {{ form.username.label }}
+                        {% if form.username.errors %}
+                        <small class="form-text text-danger">
+                            {% for error in form.username.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                        {% endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-label-group">
+                {{ form.email(class="form-control", autofocus=autofocus) }}
+                {{ form.email.label }}
+                {% if form.email.errors %}
+                <small class="form-text text-danger">
+                    {% for error in form.email.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </small>
+                {% endif%}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        {{ form.password(class="form-control", autofocus=autofocus) }}
+                        {{ form.password.label }}
+                        {% if form.password.errors %}
+                        <small class="form-text text-danger">
+                            {% for error in form.password.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                        {% endif%}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-label-group">
+                        {{ form.confirm(class="form-control", autofocus=autofocus) }}
+                        {{ form.confirm.label }}
+                        {% if form.confirm.errors %}
+                        <small class="form-text text-danger">
+                            {% for error in form.confirm.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                        {% endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-block") }}
+    </form>
+
+</div>
+{% endblock %}

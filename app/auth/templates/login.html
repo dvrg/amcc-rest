@@ -1,0 +1,50 @@
+{% extends 'base_auth.html' %}
+{% block title %}Login ke sistem.{% endblock %}
+{% block content %}
+<div class="card-header">Login ke sistem</div>
+<div class="card-body">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <div class="form-label-group">
+                {{ form.email(class="form-control", autofocus=autofocus) }}
+                {{ form.email.label }}
+                {% if form.email.errors %}
+                <small class="form-text text-danger">
+                    {% for error in form.email.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </small>
+                {% endif%}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-label-group">
+                <div class="form-label-group">
+                    {{ form.password(class="form-control", autofocus=autofocus) }}
+                    {{ form.password.label }}
+                    {% if form.password.errors %}
+                    <small class="form-text text-danger">
+                        {% for error in form.password.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </small>
+                    {% endif%}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                {{ form.remember_me.label() }}
+                {{ form.remember_me() }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-block") }}
+    </form>
+    <div class="text-center">
+        <a class="d-block small mt-3" href="{{ url_for('auth.register') }}">Register an Account</a>
+        <a class="d-block small" href="#">Forgot Password?</a>
+    </div>
+</div>
+</div>
+{% endblock %}
