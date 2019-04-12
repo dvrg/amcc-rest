@@ -3,14 +3,7 @@
 {% block title %}Tampil Data Maskapai{% endblock %}
 
 {% block content %}
-{% for message in get_flashed_messages() %}
-<div class="alert alert-dismissible fade show alert-primary" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-    </button>
-    <strong>{{ message }}</strong>
-</div>
-{% endfor %}
+{% include 'includes/_flash.html' %}
 <div class="row">
     <div class="col-6">
         <div class="card card-register">
@@ -41,7 +34,7 @@
         </div>
     </div>
     <div class="col-6">
-        <div class="card">
+        <div class="card mb-4">
             <div class="card-header d-flex justify-content-between">
                 <div><i class="fas fa-table"></i> Data Maskapai</div>
             </div>

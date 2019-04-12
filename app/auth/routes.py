@@ -2,8 +2,10 @@ from ..models import User
 from . import auth
 from app import db
 from .forms import FormUser, LoginForm
+from ..email import send_email
 from flask import Flask, render_template, redirect, flash, url_for, request
 from flask_login import login_user, logout_user, login_required
+from datetime import datetime
 
 
 @auth.route("/register", methods=["GET", "POST"])
@@ -18,6 +20,11 @@ def register():
         )
         db.session.add(data)
         db.session.commit()
+        token = data.generate_confirmation_token()
+        html = render_template(
+            "mail/confirm.html", data=data, datetime=datetime.utcnow, token=token
+        )
+        send_email(data.email, "Konfirmasi Akun", html)
         flash("Berhasil Registrasi. Silahkan login.")
         return redirect(url_for("auth.login"))
     return render_template("register.html", form=form)
