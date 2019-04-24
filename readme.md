@@ -11,10 +11,17 @@ pip install -r requirements.txt
 
 ## Preparation
 
-make env variable, and assign value based setup.py
+make env variable, and assign value based config.py
 
 ```
 touch .env
+```
+
+## Create Database
+
+```
+flask shell
+db.create_all()
 ```
 
 ## Upgrade & Run
