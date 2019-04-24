@@ -16,7 +16,7 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     MAIL_SUBJECT_PREFIX = "[AMCC-REST]"
-    MAIL_SENDER = "Admin <davidrigan.dev@gmail.com>"
+    MAIL_SENDER = ADMIN
     ADMIN = os.environ.get("ADMIN")
 
     @staticmethod
