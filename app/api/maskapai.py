@@ -16,7 +16,7 @@ def maskapai_baru():
 @api.route("/maskapai/", methods=["GET"])
 def maskapai():
     data = Maskapai.query.all()
-    return jsonify({"data maskapai": [data.to_json() for data in data]})
+    return jsonify([data.to_json() for data in data])
 
 
 @api.route("/maskapai/<int:id>", methods=["GET"])

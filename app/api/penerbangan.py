@@ -16,7 +16,7 @@ def penerbangan_baru():
 @api.route("/penerbangan/", methods=["GET"])
 def penerbangan():
     data = Penerbangan.query.all()
-    return jsonify({"data penerbangan": [data.to_json() for data in data]})
+    return jsonify([data.to_json() for data in data])
 
 
 @api.route("/penerbangan/<int:id>", methods=["GET"])
