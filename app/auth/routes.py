@@ -89,7 +89,7 @@ def confirm(token):
 def resend_confirmation():
     token = current_user.generate_confirmation_token()
     html = render_template(
-        "mail/confirm.html", data=current_user, datetime=datetime.utcnow, token=token
+        "mail/confirm.html", data=current_user, datetime=datetime.utcnow(), token=token
     )
     send_email(current_user.email, "Konfirmasi Ulang Akun", html)
     flash("Email konfirmasi ulang telah berhasil terkirim.")
