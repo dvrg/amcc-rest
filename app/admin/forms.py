@@ -9,8 +9,9 @@ from wtforms.validators import (
     EqualTo,
     Email,
 )
-from wtforms.fields.html5 import DateField
+from wtforms.fields.html5 import DateField, DateTimeField, DateTimeLocalField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from datetime import datetime
 
 
 class FormPenerbangan(FlaskForm):
@@ -26,8 +27,20 @@ class FormPenerbangan(FlaskForm):
         get_pk=lambda x: x.id,
         blank_text=(u"Pilih Maskapai"),
     )
-    tujuan = StringField(u"Tujuan", validators=[DataRequired(), Length(min=7, max=7)])
-    jam = DateField(u"Tanggal Keberangkatan")
+    asal = StringField(u"Asal", validators=[DataRequired(), Length(min=3, max=20)])
+    tujuan = StringField(u"Tujuan", validators=[DataRequired(), Length(min=3, max=20)])
+    waktu_keberangkatan = DateTimeLocalField(
+        u"Waktu Keberangkatan",
+        format="%Y-%m-%dT%H:%M:%S",
+        default=datetime.today(),
+        validators=[DataRequired()],
+    )
+    waktu_kedatangan = DateTimeLocalField(
+        u"Waktu Kedatangan",
+        format="%Y-%m-%dT%H:%M:%S",
+        default=datetime.today(),
+        validators=[DataRequired()],
+    )
     gate = SelectField(
         u"Gate", choices=[("01", "01"), ("02", "02"), ("03", "03"), ("04", "04")]
     )

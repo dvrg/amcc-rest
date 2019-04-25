@@ -19,9 +19,11 @@
                     <tr>
                         <th>Kode</th>
                         <th>Maskapai</th>
+                        <th>Asal</th>
                         <th>Tujuan</th>
                         <th>Gate</th>
-                        <th>Keberangkatan</th>
+                        <th>Waktu Keberangkatan</th>
+                        <th>Waktu Kedatangan</th>
                         <th>Status</th>
 
                     </tr>
@@ -30,9 +32,11 @@
                     <tr>
                         <th>Kode</th>
                         <th>Maskapai</th>
+                        <th>Asal</th>
                         <th>Tujuan</th>
                         <th>Gate</th>
                         <th>Keberangkatan</th>
+                        <th>Kedatangan</th>
                         <th>Status</th>
 
                     </tr>
@@ -42,9 +46,11 @@
                     <tr>
                         <td>{{ data.kode | upper }}</td>
                         <td>{{ data.maskapai | upper }}</td>
+                        <td>{{ data.asal | upper }}</td>
                         <td>{{ data.tujuan | upper }}</td>
                         <td>{{ data.gate }}</td>
-                        <td>{{ data.jam }}</td>
+                        <td>{{ data.waktu_keberangkatan }}</td>
+                        <td>{{ data.waktu_kedatangan }}</td>
                         <td>{{ data.status | upper }}</td>
                     </tr>
                     {% endfor %}

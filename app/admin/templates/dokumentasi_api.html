@@ -1,0 +1,57 @@
+{% extends 'base_admin.html' %} {% block title %}Dokumentasi API{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6 maskapai">
+    <div class="card">
+      <div class="card-header">Data Maskapai</div>
+      <div class="card-body">
+        <div class="bd-example">
+          Menampilkan seluruh data maskapai -
+          <a href="{{ url_for('api.maskapai') }}" target="_blank">tautan</a>
+        </div>
+        <div class="bd-clipboard">
+          <code>GET {{ url_for("api.maskapai") }}</code>
+        </div>
+        <hr />
+        <div class="bd-example">
+          Detail data maskapai berdasarkan {id} -
+          <a href="{{ url_for('api.maskapai_detail', id=1) }}" target="_blank"
+            >tautan</a
+          >
+        </div>
+        <div class="bd-clipboard">
+          <code>GET {{ url_for("api.maskapai_detail", id=1) }}</code>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 maskapai">
+    <div class="card">
+      <div class="card-header">Data Penerbangan</div>
+      <div class="card-body">
+        <div class="bd-example">
+          Menampilkan seluruh data penerbangan -
+          <a href="{{ url_for('api.penerbangan') }}" target="_blank">tautan</a>
+        </div>
+        <div class="bd-clipboard">
+          <code>GET {{ url_for("api.penerbangan") }}</code>
+        </div>
+        <hr />
+        <div class="bd-example">
+          Detail data penerbangan berdasarkan {id} -
+          <a
+            href="{{ url_for('api.penerbangan_detail', id=1) }}"
+            target="_blank"
+            >tautan</a
+          >
+        </div>
+        <div class="bd-clipboard">
+          <code>GET {{ url_for("api.penerbangan_detail", id=1) }}</code>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

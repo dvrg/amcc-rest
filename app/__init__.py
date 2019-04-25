@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -29,6 +29,10 @@ def create_app(config_name):
     app.register_blueprint(admin_blueprint, url_prefix="/admin")
     app.register_blueprint(api_blueprint, url_prefix="/api")
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
+
+    @app.route("/")
+    def index():
+        return redirect(url_for("auth.login"))
 
     return app
 

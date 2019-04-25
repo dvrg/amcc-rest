@@ -1,0 +1,15 @@
+{% extends 'base_auth.html' %}
+{% block title %}Konfirmasi akun anda{% endblock %}
+{% block content %}
+    <div class="card-header">Konfirmasi akun anda.</div>
+    <div class="card-body">
+      <div class="text-center mb-4">
+        <h4>Akun belum terkonfirmasi</h4>
+        <p>Sebelum dapat mengakses situs, kamu diminta untuk melakukan konfirmasi. Cek pesan di dalam kotak masuk anda atau dalam folder spam. Jika ingin meminta link baru, klik tombol dibawah ini.</p>
+      </div>
+      <div class="text-center">
+        <a class="btn btn-primary btn-block" href="{{ url_for('auth.resend_confirmation') }}">Kirim Konfirmasi Ulang</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

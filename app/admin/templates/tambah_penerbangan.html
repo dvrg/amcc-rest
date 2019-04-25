@@ -1,91 +1,114 @@
-{% extends 'base_admin.html' %}
-
-{% block title %}Tambah Data Penerbangan{% endblock %}
-
-{% block content %}
+{% extends 'base_admin.html' %} {% block title %}Tambah Data Penerbangan{%
+endblock %} {% block content %}
 <div class="card card-register">
-    <div class="card-header"><i class="fas fa-plus-circle"></i> Tambah Data Penerbangan</div>
-    <div class="card-body">
-        <form method="POST" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <div class="row">
-                <div class="col-6 mb-3">
-                    {{ form.kode.label() }} {{ name }}
-                    {{ form.kode(class='form-control', placeholder='ZZ000') }}
-                    {% if form.kode.errors %}
-                    <small class="form-text text-danger">
-                        {% for error in form.kode.errors %}
-                        {{ error }}
-                        {% endfor %}
-                    </small>
-                    {% endif%}
-                </div>
-                <div class="col-6 mb-3">
-                    {{ form.pesawat.label() }} {{ message }}
-                    {{ form.pesawat(class='form-control', placeholder='SUSIAIR', rows=5) }}
-                    {% if form.pesawat.errors %}
-                    <small class="form-text text-danger">
-                        {% for error in form.pesawat.errors %}
-                        {{ error }}
-                        {% endfor %}
-                    </small>
-                    {% endif%}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 mb-3">
-                    {{ form.tujuan.label() }} {{ message }}
-                    {{ form.tujuan(class='form-control', placeholder='XYZ-ABC') }}
-                    {% if form.tujuan.errors %}
-                    <small class="form-text text-danger">
-                        {% for error in form.tujuan.errors %}
-                        {{ error }}
-                        {% endfor %}
-                    </small>
-                    {% endif%}
-                </div>
-                <div class="col-6 mb-3">
-                    {{ form.jam.label() }} {{ message }}
-                    {{ form.jam(class='form-control') }}
-                    {% if form.jam.errors %}
-                    <small class="form-text text-danger">
-                        {% for error in form.jam.errors %}
-                        {{ error }}
-                        {% endfor %}
-                    </small>
-                    {% endif%}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 mb-3">
-                    {{ form.gate.label() }} {{ message }}
-                    {{ form.gate(class='form-control') }}
-                    {% if form.gate.errors %}
-                    <small class="form-text text-danger">
-                        {% for error in form.gate.errors %}
-                        {{ error }}
-                        {% endfor %}
-                    </small>
-                    {% endif%}
-                </div>
-                <div class="col-6 mb-3">
-                    {{ form.status.label() }} {{ message }}
-                    {{ form.status(class='form-control') }}
-                    {% if form.status.errors %}
-                    <small class="form-text text-danger">
-                        {% for error in form.status.errors %}
-                        {{ error }}
-                        {% endfor %}
-                    </small>
-                    {% endif%}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
-                </div>
-            </div>
-        </form>
-    </div>
+  <div class="card-header">
+    <i class="fas fa-plus-circle"></i> Tambah Data Penerbangan
+  </div>
+  <div class="card-body">
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <div class="row">
+        <div class="col-6 mb-3">
+          {{ form.kode.label() }} {{ name }}
+          {{ form.kode(class='form-control', placeholder='ZZ000') }}
+          {% if form.kode.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.kode.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+        <div class="col-6 mb-3">
+          {{ form.pesawat.label() }} {{ message }}
+          {{ form.pesawat(class='form-control') }}
+          {% if form.pesawat.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.pesawat.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 mb-3">
+          {{ form.asal.label() }} {{ message }}
+          {{ form.asal(class='form-control', placeholder='Yogyakarta') }}
+          {% if form.asal.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.asal.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+        <div class="col-6 mb-3">
+          {{ form.tujuan.label() }} {{ message }}
+          {{ form.tujuan(class='form-control', placeholder='Bali') }}
+          {% if form.tujuan.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.tujuan.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 mb-3">
+          {{ form.waktu_keberangkatan.label() }} {{ message }}
+          {{ form.waktu_keberangkatan(class='form-control') }}
+          {% if form.waktu_keberangkatan.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.waktu_keberangkatan.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+        <div class="col-6 mb-3">
+          {{ form.waktu_kedatangan.label() }} {{ message }}
+          {{ form.waktu_kedatangan(class='form-control') }}
+          {% if form.waktu_kedatangan.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.waktu_kedatangan.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 mb-3">
+          {{ form.gate.label() }} {{ message }}
+          {{ form.gate(class='form-control') }}
+          {% if form.gate.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.gate.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+        <div class="col-6 mb-3">
+          {{ form.status.label() }} {{ message }}
+          {{ form.status(class='form-control') }}
+          {% if form.status.errors %}
+          <small class="form-text text-danger">
+            {% for error in form.status.errors %}
+            {{ error }}
+            {% endfor %}
+          </small>
+          {% endif%}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
