@@ -33,7 +33,7 @@ def register():
         db.session.commit()
         token = data.generate_confirmation_token()
         html = render_template(
-            "mail/confirm.html", data=data, datetime=datetime.utcnow, token=token
+            "mail/confirm.html", data=data, datetime=datetime.utcnow(), token=token
         )
         send_email(data.email, "Konfirmasi Akun", html)
         flash("Berhasil Registrasi. Cek email anda untuk konfirmasi.")

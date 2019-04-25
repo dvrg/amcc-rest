@@ -15,6 +15,7 @@ from flask import (
 from datetime import datetime
 from slugify import slugify
 from flask_login import login_required
+from ..email import send_email
 
 
 @admin.route("/")
@@ -120,6 +121,11 @@ def tambah_user():
         )
         db.session.add(data)
         db.session.commit()
+        token = data.generate_confirmation_token()
+        html = render_template(
+            "mail/confirm.html", data=data, datetime=datetime.utcnow(), token=token
+        )
+        send_email(data.email, "Konfirmasi Akun", html)
         flash("Data Tersimpan!")
         return redirect(url_for("admin.lihat_user"))
     return render_template("tambah_user.html", form=form)
