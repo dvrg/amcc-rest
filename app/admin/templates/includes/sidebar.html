@@ -1,42 +1,74 @@
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav toggled">
   <li class="nav-item active dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      id="pagesDropdown"
+      role="button"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
       <i class="fas fa-fw fa-folder"></i>
       <span>Data Utama</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
       <h6 class="dropdown-header">Data Maskapai</h6>
-      <a class="dropdown-item" href="{{ url_for('admin.lihat_maskapai') }}">Lihat Data</a>
-      <hr>
+      <a class="dropdown-item" href="{{ url_for('admin.lihat_maskapai') }}"
+        >Lihat Data</a
+      >
+      <hr />
       <h6 class="dropdown-header">Data Penerbangan</h6>
-      <a class="dropdown-item" href="{{ url_for('admin.tambah_penerbangan') }}">Tambah Data</a>
-      <a class="dropdown-item" href="{{ url_for('admin.lihat_penerbangan') }}">Lihat Data</a>
+      <a class="dropdown-item" href="{{ url_for('admin.tambah_penerbangan') }}"
+        >Tambah Data</a
+      >
+      <a class="dropdown-item" href="{{ url_for('admin.lihat_penerbangan') }}"
+        >Lihat Data</a
+      >
     </div>
   </li>
   <li class="nav-item active dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      id="pagesDropdown"
+      role="button"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
       <i class="fas fa-fw fa-users"></i>
       <span>Data User</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
       <h6 class="dropdown-header">Data User</h6>
-      <a class="dropdown-item" href="{{ url_for('admin.tambah_user') }}">Tambah Data</a>
-      <a class="dropdown-item" href="{{ url_for('admin.lihat_user') }}">Lihat Data</a>
+      <a class="dropdown-item" href="{{ url_for('admin.tambah_user') }}"
+        >Tambah Data</a
+      >
+      <a class="dropdown-item" href="{{ url_for('admin.lihat_user') }}"
+        >Lihat Data</a
+      >
     </div>
   </li>
   <li class="nav-item active dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      id="pagesDropdown"
+      role="button"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
       <i class="fas fa-fw fa-link"></i>
       <span>API</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
       <h6 class="dropdown-header">Data API</h6>
-      <a class="dropdown-item" href="#">Penerbangan</a>
-      <a class="dropdown-item" href="#">Maskapai</a>
+      <a class="dropdown-item" href="{{ url_for('admin.api_documentation') }}"
+        >Dokumentasi</a
+      >
     </div>
   </li>
 </ul>

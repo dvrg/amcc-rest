@@ -22,11 +22,12 @@ touch .env
 ```
 flask shell
 db.create_all()
+ctrd + D
+flask deploy
 ```
 
 ## Upgrade & Run
 
 ```
-flask deploy
 flask run
 ```

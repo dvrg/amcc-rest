@@ -18,14 +18,18 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 
-class FormUser(FlaskForm):
-    name = StringField("Nama", validators=[DataRequired(), Length(3, 45)])
+class RegistrationForm(FlaskForm):
+    name = StringField("Nama", validators=[DataRequired(), Length(3, 64)])
     username = StringField(
         "Username",
         validators=[
             DataRequired(),
-            Length(3, 45),
-            Regexp(r"^\w+$", message="Tidak boleh ada spasi dan spesial karakter."),
+            Length(3, 64),
+            Regexp(
+                "^[A-Za-z][A-Za-z0-9_.]*$",
+                0,
+                message="Tidak boleh ada spasi dan spesial karakter.",
+            ),
         ],
     )
     email = StringField("Email", validators=[DataRequired(), Email(), Length(1, 64)])
@@ -38,7 +42,7 @@ class FormUser(FlaskForm):
         ],
     )
     confirm = PasswordField(
-        "Konfirmasi Password", validators=[DataRequired(), Length(6, 45)]
+        "Konfirmasi Password", validators=[DataRequired(), Length(6, 64)]
     )
     submit = SubmitField("Simpan")
 

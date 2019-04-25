@@ -1,4 +1,4 @@
-from app import db, login_manager
+from . import db, login_manager
 from sqlalchemy.orm import validates
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -73,8 +73,10 @@ class Penerbangan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     kode = db.Column(db.String(80), nullable=False)
     pesawat = db.Column(db.Integer, db.ForeignKey("maskapai.id"))
+    asal = db.Column(db.String(140), nullable=False)
     tujuan = db.Column(db.String(140), nullable=False)
-    jam = db.Column(db.DateTime(), nullable=False, default=datetime.now())
+    waktu_keberangkatan = db.Column(db.DateTime(), nullable=False)
+    waktu_kedatangan = db.Column(db.DateTime(), nullable=False)
     gate = db.Column(db.String(140), nullable=False)
     status = db.Column(db.String(140), nullable=False)
     slug = db.Column(db.String(80), nullable=False)
@@ -82,7 +84,7 @@ class Penerbangan(db.Model):
     def __repr__(self):
         return "<Kode %r>" % self.kode
 
-    @validates("kode", "tujuan", "status")
+    @validates("kode", "asal", "tujuan", "status")
     def convert_upper(self, key, value):
         return value.upper()
 
@@ -91,8 +93,10 @@ class Penerbangan(db.Model):
             "id": self.id,
             "kode": self.kode,
             "pesawat": self.pesawat,
+            "asal": self.asal,
             "tujuan": self.tujuan,
-            "jam": self.jam,
+            "waktu_keberangkatan": self.waktu_keberangkatan,
+            "waktu_kedatangan": self.waktu_kedatangan,
             "gate": self.gate,
             "status": self.status,
         }
@@ -121,7 +125,7 @@ class Maskapai(db.Model):
         return value.upper()
 
     def to_json(self):
-        obj = {"id": self.id, "maskapai": self.id}
+        obj = {"id": self.id, "maskapai": self.maskapai}
         return obj
 
 

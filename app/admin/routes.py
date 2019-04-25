@@ -20,7 +20,12 @@ from flask_login import login_required
 @admin.route("/")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    user = User.query.count()
+    maskapai = Maskapai.query.count()
+    penerbangan = Penerbangan.query.count()
+    return render_template(
+        "dashboard.html", user=user, maskapai=maskapai, penerbangan=penerbangan
+    )
 
 
 @admin.route("/penerbangan")
@@ -30,10 +35,12 @@ def lihat_penerbangan():
         db.session.query(
             Penerbangan.kode,
             Maskapai.maskapai,
+            Penerbangan.asal,
             Penerbangan.tujuan,
             Penerbangan.gate,
             Penerbangan.status,
-            Penerbangan.jam,
+            Penerbangan.waktu_keberangkatan,
+            Penerbangan.waktu_kedatangan,
         )
         .join(Maskapai, Penerbangan.pesawat == Maskapai.id)
         .all()
@@ -49,7 +56,10 @@ def tambah_penerbangan():
         data = Penerbangan(
             kode=form.kode.data,
             pesawat=form.pesawat.data.id,
+            asal=form.asal.data,
             tujuan=form.tujuan.data,
+            waktu_keberangkatan=form.waktu_keberangkatan.data,
+            waktu_kedatangan=form.waktu_kedatangan.data,
             gate=form.gate.data,
             status=form.status.data,
             slug=slugify(form.kode.data),
@@ -132,4 +142,10 @@ def edit_user(username):
     form.username.data = edit.username
     form.email.data = edit.email
     return render_template("edit_user.html", form=form)
+
+
+@admin.route("/dokumentasi-api")
+@login_required
+def api_documentation():
+    return render_template("dokumentasi_api.html")
 
