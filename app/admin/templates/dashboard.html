@@ -2,7 +2,7 @@
 block content %}
 <h1>
   <h1>
-    Hello, {% if current_user.is_authenticated %}{{
+    Halo, {% if current_user.is_authenticated %}{{
       current_user.name | title
     }}{% else %}Stranger{% endif %}!
   </h1>
@@ -21,7 +21,7 @@ block content %}
         class="card-footer text-white clearfix small z-1"
         href="{{ url_for('admin.lihat_user') }}"
       >
-        <span class="float-left">View Details</span>
+        <span class="float-left">{{ _(Lihat Detail) }}</span>
         <span class="float-right">
           <i class="fas fa-angle-right"></i>
         </span>
@@ -40,7 +40,7 @@ block content %}
         class="card-footer text-white clearfix small z-1"
         href="{{ url_for('admin.lihat_maskapai') }}"
       >
-        <span class="float-left">View Details</span>
+        <span class="float-left">{{ _(Lihat Detail) }}</span>
         <span class="float-right">
           <i class="fas fa-angle-right"></i>
         </span>
@@ -59,7 +59,7 @@ block content %}
         class="card-footer text-white clearfix small z-1"
         href="{{ url_for('admin.lihat_penerbangan') }}"
       >
-        <span class="float-left">View Details</span>
+        <span class="float-left">{{ _(Lihat Detail) }}</span>
         <span class="float-right">
           <i class="fas fa-angle-right"></i>
         </span>

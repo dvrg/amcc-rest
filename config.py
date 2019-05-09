@@ -20,6 +20,8 @@ class Config:
     MAIL_SENDER = os.environ.get("MAIL_USERNAME")
     ADMIN = os.environ.get("ADMIN")
 
+    LANGUAGES = ['en', 'id']
+
     @staticmethod
     def init_app(app):
         pass

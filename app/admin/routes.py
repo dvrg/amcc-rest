@@ -16,6 +16,7 @@ from datetime import datetime
 from slugify import slugify
 from flask_login import login_required
 from ..email import send_email
+from flask_babel import _
 
 
 @admin.route("/")
@@ -67,7 +68,7 @@ def tambah_penerbangan():
         )
         db.session.add(data)
         db.session.commit()
-        flash("Data Tersimpan!")
+        flash(_("Data Tersimpan!"))
         return redirect(url_for("admin.lihat_penerbangan"))
     return render_template("tambah_penerbangan.html", form=form)
 
@@ -81,7 +82,7 @@ def lihat_maskapai():
         data = Maskapai(maskapai=form.maskapai.data, slug=slugify(form.maskapai.data))
         db.session.add(data)
         db.session.commit()
-        flash("Data Tersimpan!")
+        flash(_("Data Tersimpan!"))
         return redirect(url_for("admin.lihat_maskapai"))
     return render_template("lihat_maskapai.html", data=data, form=form)
 
@@ -95,7 +96,7 @@ def edit_maskapai(slug):
     if form.validate_on_submit():
         edit.maskapai = form.maskapai.data
         db.session.commit()
-        flash("Data Tersimpan!")
+        flash(_("Data Tersimpan!"))
         return redirect(url_for("admin.lihat_maskapai"))
     form.maskapai.data = edit.maskapai
     return render_template("lihat_maskapai.html", form=form, data=data)
@@ -126,7 +127,7 @@ def tambah_user():
             "mail/confirm.html", data=data, datetime=datetime.utcnow(), token=token
         )
         send_email(data.email, "Konfirmasi Akun", html)
-        flash("Data Tersimpan!")
+        flash(_("Data Tersimpan!"))
         return redirect(url_for("admin.lihat_user"))
     return render_template("tambah_user.html", form=form)
 
@@ -142,7 +143,7 @@ def edit_user(username):
         edit.email = (form.email.data,)
         edit.password = (form.password.data,)
         db.session.commit()
-        flash("Data Tersimpan!")
+        flash(_("Data Tersimpan!"))
         return redirect(url_for("admin.lihat_user"))
     form.name.data = edit.name
     form.username.data = edit.username

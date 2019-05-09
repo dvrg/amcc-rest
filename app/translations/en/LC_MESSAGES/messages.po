@@ -1,0 +1,93 @@
+# English translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-04-29 18:36+0700\n"
+"PO-Revision-Date: 2019-04-29 18:40+0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: app/__init__.py:16
+msgid "Silahkan login untuk mengakses halaman"
+msgstr "Please login to access page."
+
+#: app/admin/forms.py:20
+msgid "Kode Penerbangan"
+msgstr "Fligt Code"
+
+#: app/admin/forms.py:30
+msgid "Maskapai"
+msgstr "Airline"
+
+#: app/admin/forms.py:33
+msgid "Asal"
+msgstr "Origin"
+
+#: app/admin/forms.py:35
+msgid "Tujuan"
+msgstr "Destination"
+
+#: app/admin/forms.py:42
+msgid "Waktu Keberangkatan"
+msgstr "Time of Take Off"
+
+#: app/admin/forms.py:50
+msgid "Waktu Kedatangan"
+msgstr "Time of Landing"
+
+#: app/admin/forms.py:54
+msgid "Gate"
+msgstr "Gate"
+
+#: app/admin/forms.py:63
+msgid "Status"
+msgstr "Status"
+
+#: app/admin/forms.py:67 app/admin/forms.py:79 app/admin/forms.py:115
+msgid "Simpan"
+msgstr "Save"
+
+#: app/admin/forms.py:77
+msgid "Nama Maskapai"
+msgstr "Name of Airline"
+
+#: app/admin/forms.py:88
+msgid "Nama"
+msgstr "Name"
+
+#: app/admin/forms.py:95
+msgid "Username"
+msgstr "Username"
+
+#: app/admin/forms.py:100
+msgid "Email"
+msgstr "Email"
+
+#: app/admin/forms.py:108
+msgid "Password"
+msgstr "Password"
+
+#: app/admin/forms.py:113
+msgid "Konfirmasi Password"
+msgstr "Confirm Password"
+
+#: app/admin/forms.py:128
+msgid "Password Lama"
+msgstr "Old Password"
+
+#: app/admin/routes.py:71 app/admin/routes.py:85 app/admin/routes.py:99
+#: app/admin/routes.py:130 app/admin/routes.py:146
+msgid "Data Tersimpan!"
+msgstr "Data has been Saved!"
+

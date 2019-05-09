@@ -12,48 +12,59 @@ from wtforms.validators import (
 from wtforms.fields.html5 import DateField, DateTimeField, DateTimeLocalField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from datetime import datetime
+from flask_babel import lazy_gettext as _l
 
 
 class FormPenerbangan(FlaskForm):
     kode = StringField(
-        u"Kode Penerbangan", validators=[DataRequired(), Length(min=5, max=5)]
+        _l(u"Kode Penerbangan", validators=[DataRequired(), Length(min=5, max=5)])
     )
     pesawat = QuerySelectField(
-        u"Maskapai",
-        validators=[DataRequired()],
-        query_factory=options_maskapai,
-        allow_blank=True,
-        get_label="maskapai",
-        get_pk=lambda x: x.id,
-        blank_text=(u"Pilih Maskapai"),
+        _l(
+            u"Maskapai",
+            validators=[DataRequired()],
+            query_factory=options_maskapai,
+            allow_blank=True,
+            get_label="maskapai",
+            get_pk=lambda x: x.id,
+            blank_text=(u"Pilih Maskapai"),
+        )
     )
-    asal = StringField(u"Asal", validators=[DataRequired(), Length(min=3, max=20)])
-    tujuan = StringField(u"Tujuan", validators=[DataRequired(), Length(min=3, max=20)])
+    asal = StringField(_l(u"Asal", validators=[DataRequired(), Length(min=3, max=20)]))
+    tujuan = StringField(
+        _l(u"Tujuan", validators=[DataRequired(), Length(min=3, max=20)])
+    )
     waktu_keberangkatan = DateTimeLocalField(
-        u"Waktu Keberangkatan",
-        format="%Y-%m-%dT%H:%M:%S",
-        default=datetime.today(),
-        validators=[DataRequired()],
+        _l(
+            u"Waktu Keberangkatan",
+            format="%Y-%m-%dT%H:%M:%S",
+            default=datetime.today(),
+            validators=[DataRequired()],
+        )
     )
     waktu_kedatangan = DateTimeLocalField(
-        u"Waktu Kedatangan",
-        format="%Y-%m-%dT%H:%M:%S",
-        default=datetime.today(),
-        validators=[DataRequired()],
+        _l(
+            u"Waktu Kedatangan",
+            format="%Y-%m-%dT%H:%M:%S",
+            default=datetime.today(),
+            validators=[DataRequired()],
+        )
     )
     gate = SelectField(
-        u"Gate", choices=[("01", "01"), ("02", "02"), ("03", "03"), ("04", "04")]
+        _l(u"Gate", choices=[("01", "01"), ("02", "02"), ("03", "03"), ("04", "04")])
     )
     status = SelectField(
-        u"Status",
-        choices=[
-            ("check in", "CHECK IN"),
-            ("to waiting room", "TO WAITING ROOM"),
-            ("landing", "LANDING"),
-            ("take off", "TAKE OFF"),
-        ],
+        _l(
+            u"Status",
+            choices=[
+                ("check in", "CHECK IN"),
+                ("to waiting room", "TO WAITING ROOM"),
+                ("landing", "LANDING"),
+                ("take off", "TAKE OFF"),
+            ],
+        )
     )
-    submit = SubmitField(u"Simpan")
+    submit = SubmitField(_l(u"Simpan"))
 
     def validate_kode(self, kode):
         kode = Penerbangan.query.filter_by(kode=kode.data).first()
@@ -63,9 +74,9 @@ class FormPenerbangan(FlaskForm):
 
 class FormMaskapai(FlaskForm):
     maskapai = StringField(
-        u"Nama Maskapai", validators=[DataRequired(), Length(min=5, max=25)]
+        _l(u"Nama Maskapai", validators=[DataRequired(), Length(min=5, max=25)])
     )
-    submit = SubmitField(u"Simpan")
+    submit = SubmitField(_l(u"Simpan"))
 
     def validate_maskapai(self, maskapai):
         maskapai = Maskapai.query.filter_by(maskapai=maskapai.data.upper()).first()
@@ -74,28 +85,34 @@ class FormMaskapai(FlaskForm):
 
 
 class FormUser(FlaskForm):
-    name = StringField("Nama", validators=[DataRequired(), Length(3, 45)])
+    name = StringField(_l("Nama", validators=[DataRequired(), Length(3, 45)]))
     username = StringField(
-        "Username",
-        validators=[
-            DataRequired(),
-            Length(3, 45),
-            Regexp(r"^\w+$", message="Tidak boleh ada spasi dan spesial karakter."),
-        ],
+        _l(
+            "Username",
+            validators=[
+                DataRequired(),
+                Length(3, 45),
+                Regexp(r"^\w+$", message="Tidak boleh ada spasi dan spesial karakter."),
+            ],
+        )
     )
-    email = StringField("Email", validators=[DataRequired(), Email(), Length(1, 64)])
+    email = StringField(
+        _l("Email", validators=[DataRequired(), Email(), Length(1, 64)])
+    )
     password = PasswordField(
-        "Password",
-        validators=[
-            DataRequired(),
-            Length(6, 45),
-            EqualTo("confirm", message="Password tidak cocok!"),
-        ],
+        _l(
+            "Password",
+            validators=[
+                DataRequired(),
+                Length(6, 45),
+                EqualTo("confirm", message="Password tidak cocok!"),
+            ],
+        )
     )
     confirm = PasswordField(
-        "Konfirmasi Password", validators=[DataRequired(), Length(6, 45)]
+        _l("Konfirmasi Password", validators=[DataRequired(), Length(6, 45)])
     )
-    submit = SubmitField("Simpan")
+    submit = SubmitField(_l("Simpan"))
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data.lower()).first():
@@ -108,5 +125,5 @@ class FormUser(FlaskForm):
 
 class FormUserEdit(FormUser):
     oldpassword = PasswordField(
-        "Password Lama", validators=[DataRequired(), Length(6, 45)]
+        _l("Password Lama", validators=[DataRequired(), Length(6, 45)])
     )
